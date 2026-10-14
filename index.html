@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Showcase e catálogo completo de projetos de Web Development: Sites, Landing Pages, Telas de Login, Componentes e Estudos em JavaScript prontos para o GitHub Pages.">
+  <meta name="keywords" content="web development, html, css, javascript, portfolio, tailwind, bootstrap, github pages, clones, login page">
+  <meta name="author" content="rafaelmm16">
+  <title>Web Development | Hub de Projetos & Demonstrações</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(17, 24, 39, 0.75);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-primary: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Ambient Lights */
+    .ambient-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(140px);
+      opacity: 0.18;
+    }
+    .glow-1 {
+      top: -150px;
+      left: -100px;
+      background: radial-gradient(circle, #6366f1, #3b82f6);
+    }
+    .glow-2 {
+      top: 30%;
+      right: -200px;
+      background: radial-gradient(circle, #ec4899, #8b5cf6);
+    }
+    .glow-3 {
+      bottom: -150px;
+      left: 30%;
+      background: radial-gradient(circle, #06b6d4, #6366f1);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header & Navigation */
+    header.site-header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.85);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4.5rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      max-width: 880px;
+      margin: 0 auto 3rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1rem;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .stat-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Filter & Controls Section */
+    .controls-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .controls-top {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .controls-top {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* Search Box */
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.85rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 1.1rem;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: none;
+      padding: 0.25rem;
+    }
+
+    .search-clear:hover {
+      color: #fff;
+    }
+
+    .results-count {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Filter Categories Tabs */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .filter-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .filter-pill.active {
+      background: var(--accent-gradient);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .filter-count {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 5rem;
+    }
+
+    /* Project Card */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(14px);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .project-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Card Thumbnail Container */
+    .card-thumb-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .card-thumb {
+      transform: scale(1.05);
+    }
+
+    .card-category-badge {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    .cat-sites { background: rgba(59, 130, 246, 0.85); color: #fff; }
+    .cat-lp { background: rgba(236, 72, 153, 0.85); color: #fff; }
+    .cat-login { background: rgba(168, 85, 247, 0.85); color: #fff; }
+    .cat-components { background: rgba(245, 158, 11, 0.85); color: #fff; }
+    .cat-js { background: rgba(16, 185, 129, 0.85); color: #fff; }
+
+    /* Card Content */
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    /* Tags */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Card Buttons */
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #fff;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Empty State */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      display: none;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-reset {
+      background: var(--accent-primary);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-reset:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      background: #05070a;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* Scroll To Top */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 99;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="./index.html" class="brand" id="brand-link">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">Web Development</div>
+        <span class="brand-tag">GitHub Pages</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="https://github.com/rafaelmm16/Web-Development" target="_blank" rel="noopener noreferrer" class="btn-github" id="github-repo-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-badge">
+        <span>🚀 Portfolio & Laboratório de Front-End</span>
+      </div>
+      <h1>Explore Todas as Pastas e Projetos <span class="gradient-text">ao Vivo</span></h1>
+      <p>Showcase interativo reunindo aplicações completas, landing pages modernas, formulários com validação, componentes animados e exercícios de JavaScript.</p>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="stat-total">21</div>
+          <div class="stat-label">Projetos Web</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Categorias</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">GitHub Pages Live</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Vanilla & Modern</div>
+          <div class="stat-label">HTML5 • CSS3 • JS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Section: Search & Category Filter -->
+    <section class="controls-wrapper" id="projects-section">
+      <div class="controls-top">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Pesquisar projetos, tecnologias (ex: Netflix, Tailwind, Loading, JS)..."
+            autocomplete="off"
+          >
+          <button id="search-clear" class="search-clear" title="Limpar busca">✕</button>
+        </div>
+        <div class="results-count" id="results-count">Exibindo 21 projetos</div>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-pill active" data-category="all">
+          <span>✨ Todos</span>
+          <span class="filter-count">21</span>
+        </button>
+        <button class="filter-pill" data-category="sites">
+          <span>🌐 Sites & Clones</span>
+          <span class="filter-count">7</span>
+        </button>
+        <button class="filter-pill" data-category="lp">
+          <span>📄 Landing Pages</span>
+          <span class="filter-count">2</span>
+        </button>
+        <button class="filter-pill" data-category="login">
+          <span>🔐 Telas de Login</span>
+          <span class="filter-count">4</span>
+        </button>
+        <button class="filter-pill" data-category="components">
+          <span>🧩 Componentes UI</span>
+          <span class="filter-count">3</span>
+        </button>
+        <button class="filter-pill" data-category="js">
+          <span>⚡ JavaScript & Estudos</span>
+          <span class="filter-count">5</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Projects Grid Container -->
+    <section class="projects-grid" id="projects-grid">
+      <!-- Projects will be injected by JavaScript -->
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3 class="empty-title">Nenhum projeto encontrado</h3>
+      <p class="empty-desc">Tente ajustar a busca ou escolher outra categoria de filtro.</p>
+      <button class="btn-reset" onclick="resetFilters()">Limpar Filtros e Busca</button>
+    </div>
+  </main>
+
+  <!-- Scroll To Top Button -->
+  <button class="scroll-top" id="scroll-top" title="Voltar ao Topo">↑</button>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://github.com/rafaelmm16/Web-Development" target="_blank" rel="noopener noreferrer">Repositório GitHub</a>
+        <a href="https://github.com/rafaelmm16" target="_blank" rel="noopener noreferrer">Perfil do Desenvolvedor</a>
+        <a href="#projects-section">Voltar aos Projetos</a>
+      </div>
+      <p>Desenvolvido com foco em boas práticas de front-end, interfaces modernas e hospedagem estática no GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    const GITHUB_REPO_URL = "https://github.com/rafaelmm16/Web-Development/tree/main";
+
+    const projectsData = [
+      /* ================= Sites & Clones ================= */
+      {
+        id: "netflix-clone",
+        title: "Netflix Clone",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Netflix/img.jpg",
+        desc: "Clone da interface inicial da Netflix com banner hero dinâmico, lista de filmes, botões de ação e estilização temática fiel.",
+        tags: ["HTML5", "CSS3", "JavaScript", "Clone UI"],
+        liveUrl: "Sites/Netflix/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Netflix`
+      },
+      {
+        id: "youtube-clone",
+        title: "YouTube Clone",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/YouTube/img.png",
+        desc: "Interface inspirada na homepage do YouTube com barra de navegação superior, menu lateral e grid responsivo de vídeos.",
+        tags: ["HTML5", "CSS3", "Flexbox", "Grid"],
+        liveUrl: "Sites/YouTube/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/YouTube`
+      },
+      {
+        id: "pinterest-clone",
+        title: "Pinterest Clone",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Pinterest/image.png",
+        desc: "Layout em alvenaria (masonry feed) inspirado no Pinterest, com cartões de imagem estilizados e hover interativo.",
+        tags: ["HTML5", "CSS3", "Masonry Layout"],
+        liveUrl: "Sites/Pinterest/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Pinterest`
+      },
+      {
+        id: "apple-showcase",
+        title: "Apple Showcase",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Apples/img.png",
+        desc: "Página de produto com design minimalista de alta sofisticação inspirada nas apresentações visuais e tipografia da Apple.",
+        tags: ["HTML5", "CSS3", "Minimalist UI"],
+        liveUrl: "Sites/Apples/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Apples`
+      },
+      {
+        id: "currency-converter",
+        title: "Conversor de Moedas",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Currency Converter/img.png",
+        desc: "Aplicação interativa de conversão de Real (BRL) para Dólar (USD) e Euro (EUR) com animação suave de resultados.",
+        tags: ["HTML5", "CSS3", "JavaScript", "Finanças"],
+        liveUrl: "Sites/Currency Converter/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Currency%20Converter`
+      },
+      {
+        id: "word-game",
+        title: "Jogo de Palavras",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Word Game/image.png",
+        desc: "Jogo interativo em JavaScript onde o jogador deve adivinhar a palavra correta, contando com feedback e modal de vitória.",
+        tags: ["HTML5", "CSS3", "JavaScript", "Game Logic"],
+        liveUrl: "Sites/Word Game/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Word%20Game`
+      },
+      {
+        id: "flowers-animation",
+        title: "Flowers Animation",
+        category: "sites",
+        categoryName: "Sites & Clones",
+        badgeClass: "cat-sites",
+        image: "Sites/Flowers/image.png",
+        desc: "Composição poética e artística de flores que desabrocham sob céu noturno com animações avançadas em puro CSS.",
+        tags: ["CSS3 Keyframes", "Animação Pura", "SVG"],
+        liveUrl: "Sites/Flowers/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Sites/Flowers`
+      },
+
+      /* ================= Landing Pages ================= */
+      {
+        id: "lp-modern-gradient",
+        title: "Landing Page 1 - Modern Gradient",
+        category: "lp",
+        categoryName: "Landing Pages",
+        badgeClass: "cat-lp",
+        image: "LP/LP 1/hero.png",
+        desc: "Landing page com gradiente moderno vibrante, navegação dinâmica com scroll, seções de recursos, métricas e tabela de preços.",
+        tags: ["Tailwind CSS", "HTML5", "Responsivo", "Landing Page"],
+        liveUrl: "LP/LP%201/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/LP/LP%201`
+      },
+      {
+        id: "lp-corporate-tech",
+        title: "Landing Page 2 - Corporate Tech",
+        category: "lp",
+        categoryName: "Landing Pages",
+        badgeClass: "cat-lp",
+        image: "LP/LP 2/img.png",
+        desc: "Landing page corporativa institucional com hero banner imersivo, cards de serviços tecnológicos e seção 'Sobre Nós'.",
+        tags: ["Tailwind CSS", "JavaScript", "Clean UI"],
+        liveUrl: "LP/LP%202/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/LP/LP%202`
+      },
+
+      /* ================= Login Pages ================= */
+      {
+        id: "login-page-1",
+        title: "Login Page 1 - Modern Card",
+        category: "login",
+        categoryName: "Telas de Login",
+        badgeClass: "cat-login",
+        image: "Login Page/Login Page 1/image.png",
+        desc: "Interface de autenticação com cartão centralizado, gradiente de fundo suave, sombras elegantes e campos de formulário estilizados.",
+        tags: ["HTML5", "CSS3", "Flexbox", "Auth Card"],
+        liveUrl: "Login%20Page/Login%20Page%201/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Login%20Page/Login%20Page%201`
+      },
+      {
+        id: "login-page-2",
+        title: "Login Page 2 - Astronaut Theme",
+        category: "login",
+        categoryName: "Telas de Login",
+        badgeClass: "cat-login",
+        image: "Login Page/Login Page 2/img.png",
+        desc: "Tela de login temática espacial com ilustração vetorial SVG de astronauta e paleta de cores moderna em tons de roxo.",
+        tags: ["HTML5", "CSS3", "SVG Vector", "Dark Theme"],
+        liveUrl: "Login%20Page/Login%20Page%202/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Login%20Page/Login%20Page%202`
+      },
+      {
+        id: "login-page-3",
+        title: "Login Page 3 - Forest Glassmorphism",
+        category: "login",
+        categoryName: "Telas de Login",
+        badgeClass: "cat-login",
+        image: "Login Page/Login Page 3/image.png",
+        desc: "Tela de autenticação imersiva com plano de fundo de floresta enevoada e card translúcido com efeito Glassmorphism.",
+        tags: ["Glassmorphism", "CSS Backdrop", "Transparência"],
+        liveUrl: "Login%20Page/Login%20Page%203/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Login%20Page/Login%20Page%203`
+      },
+      {
+        id: "login-page-4",
+        title: "Login Page 4 - Animated Toggle",
+        category: "login",
+        categoryName: "Telas de Login",
+        badgeClass: "cat-login",
+        image: "Login Page/Login Page 4/img.png",
+        desc: "Tela de login dupla com transição deslizante animada entre Entrar (Sign In) e Cadastrar (Sign Up).",
+        tags: ["HTML5", "CSS3", "JavaScript", "Sliding Transition"],
+        liveUrl: "Login%20Page/Login%20Page%204/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Login%20Page/Login%20Page%204`
+      },
+
+      /* ================= Componentes UI ================= */
+      {
+        id: "comp-dark-light-loading",
+        title: "Dark-Light Loading",
+        category: "components",
+        categoryName: "Componentes UI",
+        badgeClass: "cat-components",
+        image: "Components/Dark-Light Loading/img.png",
+        desc: "Componente de carregamento interativo com botão de alternância entre modo escuro e modo claro e micro-animação.",
+        tags: ["CSS Keyframes", "Dark Mode", "Micro-Interação"],
+        liveUrl: "Components/Dark-Light%20Loading/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Components/Dark-Light%20Loading`
+      },
+      {
+        id: "comp-modern-loading",
+        title: "Modern Loading Spinner",
+        category: "components",
+        categoryName: "Componentes UI",
+        badgeClass: "cat-components",
+        image: "Components/Modern Loading/img.png",
+        desc: "Spinner de carregamento futurista com anel de gradiente brilhante em rotação contínua para estados de loading assíncronos.",
+        tags: ["CSS Keyframes", "Glow Spinner", "UI Component"],
+        liveUrl: "Components/Modern%20Loading/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Components/Modern%20Loading`
+      },
+      {
+        id: "comp-stairs",
+        title: "Stairs Stepper Animation",
+        category: "components",
+        categoryName: "Componentes UI",
+        badgeClass: "cat-components",
+        image: "Components/Stairs/image.png",
+        desc: "Animação geométrica e hipnótica simulando degraus de escada em movimento contínuo usando pura física de CSS.",
+        tags: ["CSS3 3D", "Geometria", "Animação Pura"],
+        liveUrl: "Components/Stairs/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Components/Stairs`
+      },
+
+      /* ================= JavaScript & Estudos ================= */
+      {
+        id: "js-bootstrap",
+        title: "Bootstrap 5 Showcase & Carousel",
+        category: "js",
+        categoryName: "Estudos JS",
+        badgeClass: "cat-js",
+        image: "Curso de JS/Bootstrap/public/img/natureza1.jpg",
+        desc: "Demonstração prática dos componentes do Bootstrap 5, incluindo carrossel de imagens com indicadores, legendas e controles.",
+        tags: ["Bootstrap 5", "Carrossel", "Componentes"],
+        liveUrl: "Curso%20de%20JS/Bootstrap/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Curso%20de%20JS/Bootstrap`
+      },
+      {
+        id: "js-form-validation",
+        title: "Validação de Formulários",
+        category: "js",
+        categoryName: "Estudos JS",
+        badgeClass: "cat-js",
+        image: "Curso de JS/Form validation/img.png",
+        desc: "Validador interativo de campos de formulário com verificação assíncrona, prevenção de envio e avisos visuais.",
+        tags: ["JavaScript Vanilla", "Validação", "Formulários", "DOM"],
+        liveUrl: "Curso%20de%20JS/Form%20validation/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Curso%20de%20JS/Form%20validation`
+      },
+      {
+        id: "js-funcional",
+        title: "JavaScript Funcional (Interactive Runner)",
+        category: "js",
+        categoryName: "Estudos JS",
+        badgeClass: "cat-js",
+        image: "Curso de JS/JavaScript Funcional/img.png",
+        desc: "Playground interativo com execução ao vivo no navegador demonstrando Arrow Functions, método map, IIFE e operador Spread.",
+        tags: ["ES6+", "JS Funcional", "Arrow Functions", "Runner"],
+        liveUrl: "Curso%20de%20JS/JavaScript%20Funcional/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Curso%20de%20JS/JavaScript%20Funcional`
+      },
+      {
+        id: "js-algorithms",
+        title: "Algoritmos & POO em JS",
+        category: "js",
+        categoryName: "Estudos JS",
+        badgeClass: "cat-js",
+        image: "JS/img.png",
+        desc: "Resolução e simulação de desafios de POO (Account Transactions) e Closures de alta ordem (Joined Logger).",
+        tags: ["POO", "Algoritmos", "HackerRank", "Classes"],
+        liveUrl: "JS/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/JS`
+      },
+      {
+        id: "js-jquery",
+        title: "jQuery Sandbox",
+        category: "js",
+        categoryName: "Estudos JS",
+        badgeClass: "cat-js",
+        image: "Curso de JS/jQuery/img1.png",
+        desc: "Laboratório de manipulação do DOM com seletores jQuery, alternância de classes dinâmicas, eventos de clique e troca de imagens.",
+        tags: ["jQuery", "DOM Manipulation", "Eventos"],
+        liveUrl: "Curso%20de%20JS/jQuery/index.html",
+        githubUrl: `${GITHUB_REPO_URL}/Curso%20de%20JS/jQuery`
+      }
+    ];
+
+    // State
+    let currentCategory = "all";
+    let searchQuery = "";
+
+    // DOM Elements
+    const grid = document.getElementById("projects-grid");
+    const searchInput = document.getElementById("search-input");
+    const searchClear = document.getElementById("search-clear");
+    const filterTabs = document.getElementById("filter-tabs");
+    const resultsCount = document.getElementById("results-count");
+    const emptyState = document.getElementById("empty-state");
+    const scrollTopBtn = document.getElementById("scroll-top");
+
+    // Check URL parameters for pre-selected category
+    function initURLParams() {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get("category");
+      if (catParam) {
+        currentCategory = catParam;
+        document.querySelectorAll(".filter-pill").forEach(pill => {
+          if (pill.dataset.category === catParam) {
+            pill.classList.add("active");
+          } else {
+            pill.classList.remove("active");
+          }
+        });
+      }
+    }
+
+    // Render Cards
+    function renderProjects() {
+      const filtered = projectsData.filter(item => {
+        const matchesCategory = currentCategory === "all" || item.category === currentCategory;
+        const matchesSearch = searchQuery === "" || 
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        
+        return matchesCategory && matchesSearch;
+      });
+
+      // Update counter
+      resultsCount.textContent = `Exibindo ${filtered.length} de ${projectsData.length} projetos`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        emptyState.style.display = "block";
+        return;
+      }
+
+      emptyState.style.display = "none";
+
+      grid.innerHTML = filtered.map(item => `
+        <article class="project-card" data-id="${item.id}">
+          <div class="card-thumb-wrap">
+            <span class="card-category-badge ${item.badgeClass}">${item.categoryName}</span>
+            <img src="${item.image}" alt="${item.title}" class="card-thumb" loading="lazy" onerror="this.src='Components/Modern%20Loading/img.png'">
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title">${item.title}</h2>
+            <p class="card-desc">${item.desc}</p>
+
+            <div class="card-tags">
+              ${item.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+            </div>
+
+            <div class="card-actions">
+              <a href="${item.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary" title="Abrir projeto no GitHub Pages">
+                <span>🚀 Abrir</span>
+              </a>
+              <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary" title="Ver código no GitHub">
+                <span>💻 Código</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    // Events: Search
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      searchClear.style.display = searchQuery ? "block" : "none";
+      renderProjects();
+    });
+
+    searchClear.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      searchClear.style.display = "none";
+      searchInput.focus();
+      renderProjects();
+    });
+
+    // Events: Category Filter
+    filterTabs.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-pill");
+      if (!btn) return;
+
+      document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+
+      currentCategory = btn.dataset.category;
+
+      // Update URL query without full reload
+      const url = new URL(window.location);
+      if (currentCategory === "all") {
+        url.searchParams.delete("category");
+      } else {
+        url.searchParams.set("category", currentCategory);
+      }
+      window.history.replaceState({}, "", url);
+
+      renderProjects();
+    });
+
+    // Reset Filters
+    window.resetFilters = function() {
+      currentCategory = "all";
+      searchQuery = "";
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      document.querySelectorAll(".filter-pill").forEach(p => {
+        p.classList.toggle("active", p.dataset.category === "all");
+      });
+      const url = new URL(window.location);
+      url.searchParams.delete("category");
+      window.history.replaceState({}, "", url);
+      renderProjects();
+    };
+
+    // Scroll to Top
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add("visible");
+      } else {
+        scrollTopBtn.classList.remove("visible");
+      }
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Init
+    initURLParams();
+    renderProjects();
+  </script>
+</body>
+</html>

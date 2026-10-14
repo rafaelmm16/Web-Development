@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafios de Algoritmos em JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --primary: #3b82f6;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --code-bg: #030712;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #60a5fa;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .nav-links {
+      margin-top: 1rem;
+    }
+
+    .nav-links a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .btn-run {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-run:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    pre code {
+      display: block;
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+
+    .console-box {
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      min-height: 80px;
+      white-space: pre-wrap;
+    }
+
+    .console-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">🧠 Algoritmos & POO</span>
+      <h1>Desafios de JavaScript</h1>
+      <p class="desc">Resoluções de desafios práticos de Programação Orientada a Objetos e Higher-Order Functions.</p>
+      <div class="nav-links">
+        <a href="../index.html">← Voltar para o Portfólio Principal</a>
+      </div>
+    </header>
+
+    <!-- Challenge 1 -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">1. Account Transactions (POO)</h2>
+        <button class="btn-run" onclick="testAccount()">▶ Simular Transações</button>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
+        Implementação de uma classe <code>Account</code> com operações bancárias de depósito (crédito), saque (débito com verificação de saldo) e consulta de saldo.
+      </p>
+      <pre><code>class Account {
+  constructor(balance) {
+    this.balance = balance;
+  }
+
+  debit(amount) {
+    if (amount > this.balance) {
+      return false;
+    } else {
+      this.balance -= amount;
+      return true;
+    }
+  }
+
+  getBalance() {
+    return this.balance;
+  }
+
+  credit(amount) {
+    this.balance += amount;
+  }
+}</code></pre>
+      <div class="console-header">Resultado da Simulação:</div>
+      <div class="console-box" id="console-account">// Clique em "Simular Transações" para testar</div>
+    </div>
+
+    <!-- Challenge 2 -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">2. Joined Logger (Higher-Order Function)</h2>
+        <button class="btn-run" onclick="testLogger()">▶ Simular Logger</button>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
+        Função de alta ordem (closure) que filtra mensagens com nível de severidade maior ou igual ao mínimo definido e as une usando um separador customizado.
+      </p>
+      <pre><code>function joinedLogger(level, sep) {
+  return function (...messages) {
+    const filteredMessages = messages.filter((msg) => msg.level >= level);
+    const joinedText = filteredMessages.map((msg) => msg.text).join(sep);
+    return joinedText;
+  };
+}</code></pre>
+      <div class="console-header">Resultado da Simulação:</div>
+      <div class="console-box" id="console-logger">// Clique em "Simular Logger" para testar</div>
+    </div>
+  </div>
+
+  <script>
+    class Account {
+      constructor(balance) {
+        this.balance = balance;
+      }
+      debit(amount) {
+        if (amount > this.balance) return false;
+        this.balance -= amount;
+        return true;
+      }
+      getBalance() {
+        return this.balance;
+      }
+      credit(amount) {
+        this.balance += amount;
+      }
+    }
+
+    function testAccount() {
+      const logs = [];
+      const acc = new Account(100);
+      logs.push("→ Conta criada com saldo inicial de: R$ 100,00");
+
+      logs.push("→ Operação: Credit(50)");
+      acc.credit(50);
+      logs.push(`✓ Sucesso! Saldo atual: R$ ${acc.getBalance()},00`);
+
+      logs.push("→ Operação: Debit(70)");
+      if (acc.debit(70)) {
+        logs.push(`✓ R$ 70,00 debitado. Saldo restante: R$ ${acc.getBalance()},00`);
+      }
+
+      logs.push("→ Operação: Debit(100) [Tentativa de saque maior que o saldo]");
+      if (!acc.debit(100)) {
+        logs.push(`✗ Erro: Saldo insuficiente! Saldo atual é R$ ${acc.getBalance()},00`);
+      }
+
+      document.getElementById('console-account').textContent = logs.join('\n');
+    }
+
+    function joinedLogger(level, sep) {
+      return function (...messages) {
+        const filtered = messages.filter(m => m.level >= level);
+        return filtered.map(m => m.text).join(sep);
+      };
+    }
+
+    function testLogger() {
+      const logs = [];
+      const warnAndErrorLogger = joinedLogger(2, " | ");
+      logs.push("→ Criado logger com nível mínimo 2 (WARN) e separador ' | '");
+
+      const msgs = [
+        { level: 1, text: "[DEBUG] Carregando assets..." },
+        { level: 2, text: "[WARN] Resposta de rede demorando" },
+        { level: 3, text: "[ERROR] Falha de conexão na API" },
+        { level: 1, text: "[DEBUG] Conexão encerrada" }
+      ];
+
+      logs.push("\n→ Mensagens recebidas:");
+      msgs.forEach(m => logs.push(`   Nível ${m.level}: ${m.text}`));
+
+      const result = warnAndErrorLogger(...msgs);
+      logs.push(`\n→ Mensagens unidas filtradas (>= 2):\n   "${result}"`);
+
+      document.getElementById('console-logger').textContent = logs.join('\n');
+    }
+  </script>
+</body>
+</html>
