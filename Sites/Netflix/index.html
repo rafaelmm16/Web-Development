@@ -1,78 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Netflix Clone - Interface interativa para assistir filmes e séries online.">
+  <title>Netflix Brasil - Início</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">
-                <img src="img.jpg" alt="Netflix Logo" width="150"> </a>
-            <ul>
-                <li><a href="#" class="active">Início</a></li>
-                <li><a href="#">Séries</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a href="#">Minha Lista</a></li>
-            </ul>
-            <div class="search-container">
-                <input type="text" placeholder="Buscar...">
-                <button type="submit">Buscar</button>
-            </div>
 
-            <div class="profile">
-                <img src="img.jpg" alt="Profile">
-            </div>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-left">
+      <a href="./index.html" class="netflix-logo" aria-label="Netflix">
+        <img src="netflix-logo.svg" alt="Netflix" class="netflix-logo-img">
+      </a>
 
+      <ul class="nav-links">
+        <li><a href="#" class="nav-item active" data-filter="all">Início</a></li>
+        <li><a href="#" class="nav-item" data-filter="series">Séries</a></li>
+        <li><a href="#" class="nav-item" data-filter="filmes">Filmes</a></li>
+        <li><a href="#" class="nav-item" data-filter="em-alta">Bombando</a></li>
+        <li><a href="#" class="nav-item" data-filter="minha-lista">Minha Lista <span class="list-badge" id="list-badge">0</span></a></li>
+      </ul>
+    </div>
 
+    <div class="nav-right">
+      <!-- Search Bar -->
+      <div class="search-box" id="search-box">
+        <button class="search-btn" id="search-btn" title="Buscar">
+          <i class="fas fa-search"></i>
+        </button>
+        <input type="text" id="search-input" placeholder="Títulos, gente e gêneros..." autocomplete="off">
+        <button class="search-close" id="search-close" title="Fechar busca">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Back to Portfolio Hub -->
+      <a href="../../index.html" class="hub-btn" title="Voltar para o Portfólio Hub">
+        <i class="fas fa-home"></i>
+        <span class="hub-btn-text">Hub</span>
+      </a>
+
+      <!-- Notifications Icon -->
+      <div class="nav-icon" id="bell-btn" title="Notificações">
+        <i class="fas fa-bell"></i>
+        <span class="bell-dot"></span>
+      </div>
+
+      <!-- User Profile Dropdown -->
+      <div class="profile-menu">
+        <div class="profile-avatar" id="profile-avatar">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+          <i class="fas fa-caret-down"></i>
         </div>
-    </nav>
-
-    <header class="banner">
-        <div class="container">
-            <div class="banner-content">
-                <h1>Stranger Things</h1>
-                <p>Em uma pequena cidade, um grupo de amigos se depara com eventos sobrenaturais e o desaparecimento de
-                    um de seus colegas, levando-os a uma jornada cheia de mistérios e perigos.</p>
-                <div class="buttons">
-                    <button class="play-btn"><i class="fas fa-play"></i> Assistir Agora</button>
-                    <button class="info-btn"><i class="fas fa-info-circle"></i> Mais Informações</button>
-                </div>
-            </div>
-            <div class="banner-fade"></div>
+        <div class="profile-dropdown" id="profile-dropdown">
+          <div class="dropdown-item user-info">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+            <span>Rafael</span>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item"><i class="fas fa-user-edit"></i> Gerenciar perfis</a>
+          <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Conta</a>
+          <a href="#" class="dropdown-item"><i class="fas fa-question-circle"></i> Centro de ajuda</a>
+          <div class="dropdown-divider"></div>
+          <a href="../../index.html" class="dropdown-item"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
         </div>
+      </div>
+    </div>
+  </nav>
 
-    </header>
+  <!-- Hero Banner -->
+  <header class="hero-banner" id="hero-banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-bottom-fade"></div>
 
-    <section class="movies">
-        <div class="container">
-            <h2>Séries Populares</h2>
-            <div class="movie-list">
-            </div>
-        </div>
+    <div class="banner-content">
+      <div class="banner-type">
+        <span class="n-logo">N</span>
+        <span class="type-text">S É R I E</span>
+      </div>
+
+      <h1 class="banner-title" id="banner-title">STRANGER THINGS</h1>
+
+      <div class="banner-meta">
+        <span class="match-score">98% relevante</span>
+        <span class="age-badge">16+</span>
+        <span class="seasons-count">4 Temporadas</span>
+        <span class="quality-badge">4K Ultra HD</span>
+      </div>
+
+      <p class="banner-desc" id="banner-desc">
+        Quando um jovem garoto desaparece na pacata cidade de Hawkins, amigos, familiares e a polícia local entram em uma teia de mistérios extraordinários envolvendo experimentos ultra-secretos do governo e forças sobrenaturais aterrorizantes.
+      </p>
+
+      <div class="banner-buttons">
+        <button class="btn btn-play" id="banner-play-btn">
+          <i class="fas fa-play"></i> Assistir Agora
+        </button>
+        <button class="btn btn-info" id="banner-info-btn">
+          <i class="fas fa-info-circle"></i> Mais Informações
+        </button>
+        <button class="btn-add-list" id="banner-list-btn" title="Minha Lista" aria-label="Adicionar à Minha Lista">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="banner-right-meta">
+      <button class="audio-btn" id="audio-btn" title="Áudio">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <div class="rating-box">
+        <span class="rating-strip">16+</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Rows -->
+  <main class="main-content" id="main-content">
+
+    <!-- Search Results Row (Dynamic) -->
+    <section class="movie-row-section" id="search-results-section" style="display: none;">
+      <h2 class="row-header">Resultados da busca por: <span id="search-query-text"></span></h2>
+      <div class="movie-row-container">
+        <div class="movie-grid" id="search-results-grid"></div>
+      </div>
     </section>
 
-    <section class="movies">
-        <div class="container">
-            <h2>Filmes Recomendados</h2>
-            <div class="movie-list">
-            </div>
-        </div>
+    <!-- Row 1: Séries Populares -->
+    <section class="movie-row-section" id="row-series">
+      <h2 class="row-header">Séries Populares na Netflix</h2>
+      <div class="movie-row-container">
+        <button class="slider-arrow arrow-left" onclick="slideRow('series-list', -1)" aria-label="Anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="movie-list" id="series-list"></div>
+        <button class="slider-arrow arrow-right" onclick="slideRow('series-list', 1)" aria-label="Próximo">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </section>
 
+    <!-- Row 2: Filmes Recomendados -->
+    <section class="movie-row-section" id="row-movies">
+      <h2 class="row-header">Filmes Aclamados pela Crítica</h2>
+      <div class="movie-row-container">
+        <button class="slider-arrow arrow-left" onclick="slideRow('movies-list', -1)" aria-label="Anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="movie-list" id="movies-list"></div>
+        <button class="slider-arrow arrow-right" onclick="slideRow('movies-list', 1)" aria-label="Próximo">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>© 2024 Netflix Clone</p>
+    <!-- Row 3: Em Alta no Brasil -->
+    <section class="movie-row-section" id="row-trending">
+      <h2 class="row-header">Em Alta no Brasil Hoje</h2>
+      <div class="movie-row-container">
+        <button class="slider-arrow arrow-left" onclick="slideRow('trending-list', -1)" aria-label="Anterior">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="movie-list" id="trending-list"></div>
+        <button class="slider-arrow arrow-right" onclick="slideRow('trending-list', 1)" aria-label="Próximo">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Row 4: Minha Lista -->
+    <section class="movie-row-section" id="row-my-list">
+      <h2 class="row-header">Minha Lista</h2>
+      <div class="movie-row-container">
+        <div class="movie-list" id="my-list-items"></div>
+        <div class="empty-list-message" id="empty-list-msg">
+          <i class="fas fa-plus-circle"></i>
+          <p>Você ainda não adicionou nenhum título à sua lista. Clique no botão <strong>+</strong> nos cards para salvar seus favoritos!</p>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script src="https://kit.fontawesome.com/yourfontawesomekit.js"></script>
-    <script src="script.js"></script>
+  <!-- Detail / Video Modal -->
+  <div class="modal" id="movie-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Fechar">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Video / Hero Container in Modal -->
+      <div class="modal-hero" id="modal-hero">
+        <div class="modal-hero-gradient"></div>
+        <div class="modal-hero-controls">
+          <h2 class="modal-title" id="modal-title">Stranger Things</h2>
+          <div class="modal-actions">
+            <button class="btn btn-play" id="modal-play-action">
+              <i class="fas fa-play"></i> Assistir
+            </button>
+            <button class="modal-icon-btn" id="modal-add-list" title="Adicionar à lista">
+              <i class="fas fa-plus"></i>
+            </button>
+            <button class="modal-icon-btn" id="modal-like-btn" title="Classificar com gostei">
+              <i class="far fa-thumbs-up"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="modal-main-info">
+          <div class="modal-tags">
+            <span class="match-score" id="modal-match">98% relevante</span>
+            <span class="age-badge" id="modal-age">16+</span>
+            <span class="quality-badge">HD</span>
+            <span class="modal-duration" id="modal-duration">4 Temporadas</span>
+          </div>
+
+          <p class="modal-synopsis" id="modal-synopsis"></p>
+        </div>
+
+        <div class="modal-side-info">
+          <p><span class="meta-label">Elenco:</span> <span id="modal-cast"></span></p>
+          <p><span class="meta-label">Gêneros:</span> <span id="modal-genres"></span></p>
+          <p><span class="meta-label">Criação:</span> <span id="modal-creator"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Footer -->
+  <footer class="netflix-footer">
+    <div class="footer-container">
+      <div class="social-icons">
+        <a href="https://github.com/rafaelmm16/Web-Development" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Idioma e Legendas</a>
+        <a href="#">Central de Ajuda</a>
+        <a href="#">Cartão Pré-pago</a>
+        <a href="#">Imprensa</a>
+        <a href="#">Relações com Investidores</a>
+        <a href="#">Carreiras</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Privacidade</a>
+        <a href="#">Avisos Legais</a>
+        <a href="#">Preferências de Cookies</a>
+        <a href="#">Informações Corporativas</a>
+        <a href="#">Entre em Contato</a>
+      </div>
+
+      <a href="../../index.html" class="service-code-btn">← Voltar para o Portfólio Hub</a>
+
+      <p class="copyright">© 1997-2024 Netflix, Inc. • Desenvolvido para fins de estudo por Rafael</p>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
-
 </html>
