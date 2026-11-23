@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jogo de adivinhação de palavras com categorias, dicas progressivas, teclado interativo e suporte a acentuação em português.">
+  <title>Léxico — Jogo de Adivinhação de Palavras</title>
+
+  <!-- Tipografia Editorial & Monospace -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand-area">
+        <a href="../../index.html" class="back-link" title="Voltar ao diretório principal">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 12L6 8L10 4"/>
+          </svg>
+          <span>Diretório</span>
+        </a>
+        <span class="divider">/</span>
+        <div class="game-brand">
+          <span class="brand-title">LÉXICO</span>
+          <span class="brand-sub">Word Puzzle</span>
+        </div>
+      </div>
+
+      <div class="topbar-controls">
+        <!-- Seletor de Categoria -->
+        <div class="select-wrapper">
+          <label for="category-select" class="sr-only">Categoria</label>
+          <select id="category-select" class="category-select" aria-label="Filtrar categoria de palavras">
+            <option value="all">Tema: Todos (40)</option>
+            <option value="tech">Computação &amp; Web</option>
+            <option value="nature">Fauna &amp; Natureza</option>
+            <option value="science">Ciência &amp; Cosmos</option>
+            <option value="culture">Geografia &amp; Cultura</option>
+          </select>
+        </div>
+
+        <button type="button" id="theme-btn" class="icon-btn" title="Alternar tema claro/escuro" aria-label="Alternar tema">
+          <span id="theme-label">Light</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal do Jogo -->
+  <main class="game-workspace container">
+
+    <!-- Painel de Status & Placar -->
+    <section class="hud-panel" aria-label="Status da partida">
+      <div class="hud-stats">
+        <div class="stat-box">
+          <span class="stat-label">Pontos</span>
+          <span class="stat-value" id="stat-score">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Sequência</span>
+          <span class="stat-value" id="stat-streak">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Recorde</span>
+          <span class="stat-value" id="stat-best">0</span>
+        </div>
+      </div>
+
+      <!-- Medidor de Tentativas (Vidas) -->
+      <div class="attempts-box">
+        <div class="attempts-header">
+          <span class="stat-label">Integridade / Tentativas</span>
+          <span class="attempts-counter" id="attempts-text">6 / 6</span>
+        </div>
+        <div class="attempts-segments" id="attempts-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="6">
+          <!-- Segmentos injetados via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Arena da Palavra -->
+    <section class="board-panel" id="board-panel">
+      <div class="board-meta">
+        <span class="category-pill" id="current-category-badge">Categoria</span>
+        <span class="word-length-info" id="word-length-badge">0 letras</span>
+      </div>
+
+      <!-- Slots das Letras -->
+      <div class="word-slots" id="word-slots" aria-live="polite"></div>
+
+      <!-- Barra de Dica e Mensagem de Feedback -->
+      <div class="clue-bar">
+        <div class="clue-content" id="clue-box">
+          <span class="clue-tag">PISTA</span>
+          <p class="clue-text" id="clue-text">Revele uma pista caso precise de contexto sobre a palavra oculta.</p>
+        </div>
+        <button type="button" id="btn-hint" class="btn-secondary btn-sm" title="Revelar dica contextual">
+          <span>Revelar pista</span>
+        </button>
+      </div>
+
+      <!-- Banner de Feedback Instantâneo -->
+      <div class="feedback-line" id="feedback-line" role="status" aria-live="polite">
+        Use o teclado físico, clique nas teclas abaixo ou arrisque a palavra inteira.
+      </div>
+    </section>
+
+    <!-- Controles de Entrada: Teclado Virtual + Chute de Palavra Completa -->
+    <section class="controls-panel">
+      <!-- Teclado QWERTY Interativo -->
+      <div class="keyboard" id="virtual-keyboard" role="group" aria-label="Teclado virtual">
+        <!-- Linhas geradas via JS -->
+      </div>
+
+      <!-- Rodapé de Ações: Chutar Palavra Completa / Pular -->
+      <div class="direct-guess-bar">
+        <form id="full-guess-form" class="guess-form" autocomplete="off">
+          <input
+            type="text"
+            id="guess-input"
+            class="guess-input"
+            placeholder="Sabe a palavra? Digite o chute completo..."
+            aria-label="Digitar palavra completa"
+          >
+          <button type="submit" id="submit-guess" class="btn-primary">
+            <span>Arriscar</span>
+          </button>
+        </form>
+
+        <div class="quick-actions">
+          <button type="button" id="btn-reveal-letter" class="btn-outline" title="Custa 1 tentativa para revelar uma letra aleatória">
+            <span>Revelar 1 Letra (-1 vida)</span>
+          </button>
+          <button type="button" id="btn-new-word" class="btn-outline" title="Sortear outra palavra">
+            <span>Nova Palavra &rarr;</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de Fim de Rodada (Vitória ou Derrota) -->
+  <div id="result-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-status-tag" id="modal-tag">RESULTADO</span>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Fechar janela">&times;</button>
+      </div>
+
+      <h2 class="modal-title" id="modal-title">Palavra Decifrada</h2>
+      <p class="modal-desc" id="modal-desc">Resumo da rodada.</p>
+
+      <div class="modal-word-reveal">
+        <span class="reveal-label">PALAVRA OCULTA</span>
+        <div class="reveal-word" id="modal-word">PALAVRA</div>
+        <p class="reveal-hint" id="modal-word-clue"></p>
+      </div>
+
+      <div class="modal-summary-grid">
+        <div class="summary-cell">
+          <span class="summary-key">Erros</span>
+          <span class="summary-val" id="modal-mistakes">0 / 6</span>
+        </div>
+        <div class="summary-cell">
+          <span class="summary-key">Pontos Ganhos</span>
+          <span class="summary-val" id="modal-points">+0</span>
+        </div>
+        <div class="summary-cell">
+          <span class="summary-key">Sequência Atual</span>
+          <span class="summary-val" id="modal-streak">0</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="modal-next-btn" class="btn-primary btn-full">
+          <span>Próxima Palavra (Enter)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
