@@ -173,7 +173,7 @@
                   alt="Preview do projeto ${item.title}"
                   class="preview-img"
                   loading="lazy"
-                  onerror="this.src='Components/Modern%20Loading/img.png'"
+                  onerror="this.src='components/modern-loading/img.png'"
                 >
               </a>
             </div>

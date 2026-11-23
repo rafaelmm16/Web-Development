@@ -1,147 +1,127 @@
-# 🌐 Web Development - Showcase & Portfólio de Projetos
+# Web-Development — Diretório de Projetos Front-End
 
 <p align="center">
-  <img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-success?style=for-the-badge&logo=github" alt="GitHub Pages Live">
-  <img src="https://img.shields.io/badge/Projetos-21%20Concluídos-blue?style=for-the-badge" alt="Projetos">
-  <img src="https://img.shields.io/badge/Tecnologias-HTML5%20%7C%20CSS3%20%7C%20JavaScript-orange?style=for-the-badge&logo=javascript" alt="Tecnologias">
+  <img src="https://img.shields.io/badge/GitHub%20Pages-Online-16a34a?style=flat-square&logo=github" alt="GitHub Pages Live">
+  <img src="https://img.shields.io/badge/Projetos-21%20Entradas-e06d44?style=flat-square" alt="21 Projetos">
+  <img src="https://img.shields.io/badge/Arquitetura-kebab--case%20%7C%20Modular-272724?style=flat-square" alt="Arquitetura Modular">
 </p>
 
 <p align="center">
-  🚀 <strong><a href="https://rafaelmm16.github.io/Web-Development/">Clique aqui para acessar o Portal ao Vivo no GitHub Pages</a></strong>
+  <strong><a href="https://rafaelmm16.github.io/Web-Development/">Acessar o Diretório Interativo no GitHub Pages &rarr;</a></strong>
 </p>
 
 ---
 
-## 📖 Sobre o Repositório
+## Sobre o Repositório
 
-Este repositório reúne projetos práticos, clones de interfaces populares, landing pages responsivas, telas de autenticação, componentes animados de interface (UI) e estudos aprofundados sobre **HTML5**, **CSS3** e **JavaScript Vanilla**, além de frameworks como **Tailwind CSS**, **Bootstrap 5** e a biblioteca **jQuery**.
+Catálogo prático de interfaces web, clones de produtos, páginas de conversão (Landing Pages), fluxos de autenticação, micro-componentes CSS e laboratórios de JavaScript (**ES6+**, **POO**, **Programação Funcional**, **DOM**, **Tailwind CSS**, **Bootstrap 5** e **jQuery**).
 
-Todas as pastas e projetos estão 100% integrados e prontos para navegação direta através do **GitHub Pages**, com um portal central (`index.html`) que permite pesquisar, filtrar por categoria e testar qualquer projeto instantaneamente.
+Toda a estrutura de diretórios segue a convenção **`kebab-case`** (sem espaços ou caracteres especiais nas URLs), garantindo rotas limpas e compatibilidade direta com servidores estáticos e **GitHub Pages**.
 
 ---
 
-## 🗂️ Estrutura do Repositório
+## Arquitetura de Diretórios
 
 ```text
 Web-Development/
-├── index.html                           # 🌟 Portal Principal do GitHub Pages
+├── index.html                           # Portal principal do GitHub Pages
+├── assets/                              # Arquitetura modular do portal
+│   ├── css/
+│   │   ├── variables.css                # Tokens de design e temas (Dark / Light)
+│   │   ├── layout.css                   # Grid, cabeçalho editorial e estrutura
+│   │   └── components.css               # Cards, barra de ferramentas e lista
+│   └── js/
+│       ├── projects-data.js             # Catálogo e metadados dos 21 projetos
+│       └── app.js                       # Busca, filtros, atalhos e estado de UI
 │
-├── Sites/                               # 🌐 Clones de Sites e Web Apps
-│   ├── Apples/                          # Showcase estilo Apple
-│   ├── Currency Converter/              # Conversor de Moedas (BRL -> USD / EUR)
-│   ├── Flowers/                         # Animação poética de flores em CSS puro
-│   ├── Netflix/                         # Clone da interface Netflix
-│   ├── Pinterest/                       # Clone do layout em alvenaria do Pinterest
-│   ├── Word Game/                       # Jogo de adivinhação de palavras
-│   └── YouTube/                         # Clone da homepage do YouTube
+├── sites/                               # Clones de Interfaces e Aplicações Web
+│   ├── apple-showcase/                  # Página de produto estilo Apple
+│   ├── currency-converter/              # Conversor de moedas (BRL -> USD / EUR)
+│   ├── flowers/                         # Animação noturna de flores em CSS puro
+│   ├── netflix/                         # Clone da interface principal da Netflix
+│   ├── pinterest/                       # Feed em layout Masonry estilo Pinterest
+│   ├── word-game/                       # Léxico: Jogo de adivinhação de palavras
+│   └── youtube/                         # Clone da página inicial do YouTube
 │
-├── LP/                                  # 📄 Landing Pages
-│   ├── LP 1/                            # Landing page com gradiente moderno (Tailwind)
-│   └── LP 2/                            # Landing page corporativa de serviços (Tailwind)
+├── landing-pages/                       # Páginas de Conversão e Institucionais
+│   ├── modern-gradient/                 # Landing page SaaS com Tailwind CSS
+│   └── corporate-tech/                  # Landing page corporativa de tecnologia
 │
-├── Login Page/                          # 🔐 Telas de Login e Autenticação
-│   ├── Login Page 1/                    # Cartão de login moderno centralizado
-│   ├── Login Page 2/                    # Login temático espacial com astronauta SVG
-│   ├── Login Page 3/                    # Login imersivo com efeito Glassmorphism
-│   └── Login Page 4/                    # Login duplo com transição animada (Sign In / Sign Up)
+├── login-pages/                         # Telas de Autenticação
+│   ├── modern-card/                     # Cartão de login minimalista centralizado
+│   ├── astronaut-theme/                 # Layout dividido com ilustração SVG
+│   ├── forest-glass/                    # Autenticação com efeito Glassmorphism
+│   └── animated-toggle/                 # Painel deslizante duplo (Sign In / Sign Up)
 │
-├── Components/                          # 🧩 Componentes e Animações UI
-│   ├── Dark-Light Loading/              # Loader com alternador de tema claro/escuro
-│   ├── Modern Loading/                  # Spinner circular moderno com gradiente
-│   └── Stairs/                          # Efeito hipnótico de escadas em CSS 3D
+├── components/                          # Micro-Componentes e Animações CSS
+│   ├── dark-light-loading/              # Loader com alternador de tema claro/escuro
+│   ├── modern-loading/                  # Spinner circular em rotação contínua
+│   └── stairs/                          # Perspectiva isométrica 3D em CSS puro
 │
-├── Curso de JS/                         # ⚡ Exercícios e Estudos Práticos de JS
-│   ├── Bootstrap/                       # Carrossel interativo e componentes Bootstrap 5
-│   ├── Form validation/                 # Validação de formulários em tempo real
-│   ├── JavaScript Funcional/            # Runner interativo de ES6 (map, arrow functions, spread)
-│   ├── jQuery/                          # Sandbox de manipulação de DOM e eventos com jQuery
-│   └── UC-fbdeebf8-a492-42bd-95ba-c557fc53b6ef.pdf # Certificado do curso
-│
-└── JS/                                  # 🧠 Algoritmos e Programação Orientada a Objetos
-    ├── index.html                       # Runner interativo com simulações no navegador
-    ├── JavaScript_Account-Transactions.js # POO: Classe bancária com crédito e débito
-    └── JavaScript_Joined-Logger.js      # Higher-Order Functions: Logger com closures
+└── javascript/                          # Estudos, Algoritmos e Frameworks JS
+    ├── algorithms/                      # POO (Account) e Higher-Order Closures (Logger)
+    ├── bootstrap/                       # Galeria e carrossel com Bootstrap 5
+    ├── form-validation/                 # Motor de validação de formulários no DOM
+    ├── functional-js/                   # Runner interativo ES6+ (map, arrow, spread, IIFE)
+    └── jquery/                          # Laboratório de eventos e manipulação com jQuery
 ```
 
 ---
 
-## 🚀 Catálogo de Projetos
+## Catálogo de Projetos
 
-### 🌐 Sites & Clones
-| Projeto | Demonstração | Código Fonte | Tecnologias |
+### 1. Sites & Aplicações (`sites/`)
+| Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
-| **Netflix Clone** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Netflix/index.html) | [Ver Pasta](Sites/Netflix/) | HTML5, CSS3, JavaScript |
-| **YouTube Clone** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/YouTube/index.html) | [Ver Pasta](Sites/YouTube/) | HTML5, CSS3, Flexbox/Grid |
-| **Pinterest Clone** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Pinterest/index.html) | [Ver Pasta](Sites/Pinterest/) | HTML5, CSS3, Masonry |
-| **Apple Showcase** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Apples/index.html) | [Ver Pasta](Sites/Apples/) | HTML5, CSS3, Design Minimalista |
-| **Conversor de Moedas** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Currency%20Converter/index.html) | [Ver Pasta](Sites/Currency%20Converter/) | HTML5, CSS3, JS Vanilla |
-| **Jogo de Palavras** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Word%20Game/index.html) | [Ver Pasta](Sites/Word%20Game/) | HTML5, CSS3, JS Vanilla |
-| **Flowers Animation** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Sites/Flowers/index.html) | [Ver Pasta](Sites/Flowers/) | CSS3 Keyframes, Animação Pura |
+| **Netflix UI Clone** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/netflix/index.html) | [`sites/netflix`](sites/netflix/) | HTML5, CSS3, JavaScript |
+| **YouTube Interface** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/youtube/index.html) | [`sites/youtube`](sites/youtube/) | HTML5, CSS Grid, Flexbox |
+| **Pinterest Masonry Feed** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/pinterest/index.html) | [`sites/pinterest`](sites/pinterest/) | HTML5, CSS Columns |
+| **Apple Product Page** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/apple-showcase/index.html) | [`sites/apple-showcase`](sites/apple-showcase/) | HTML5, CSS3, Editorial UI |
+| **Conversor de Moedas** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/currency-converter/index.html) | [`sites/currency-converter`](sites/currency-converter/) | HTML5, CSS Modular, JS |
+| **Léxico — Word Puzzle** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/word-game/index.html) | [`sites/word-game`](sites/word-game/) | HTML5, CSS3, JS Game Engine |
+| **CSS Night Flowers** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/flowers/index.html) | [`sites/flowers`](sites/flowers/) | CSS3 Keyframes, JavaScript |
 
-### 📄 Landing Pages
-| Projeto | Demonstração | Código Fonte | Tecnologias |
+### 2. Landing Pages (`landing-pages/`)
+| Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
-| **Landing Page 1 - Modern Gradient** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/LP/LP%201/index.html) | [Ver Pasta](LP/LP%201/) | Tailwind CSS, Responsivo |
-| **Landing Page 2 - Corporate Tech** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/LP/LP%202/index.html) | [Ver Pasta](LP/LP%202/) | Tailwind CSS, JavaScript |
+| **SaaS Modern Gradient** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/landing-pages/modern-gradient/index.html) | [`landing-pages/modern-gradient`](landing-pages/modern-gradient/) | Tailwind CSS, HTML5 |
+| **Consultoria Corporate Tech** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/landing-pages/corporate-tech/index.html) | [`landing-pages/corporate-tech`](landing-pages/corporate-tech/) | Tailwind CSS, JavaScript |
 
-### 🔐 Telas de Login
-| Projeto | Demonstração | Código Fonte | Tecnologias |
+### 3. Autenticação (`login-pages/`)
+| Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
-| **Login Page 1 - Modern Card** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Login%20Page/Login%20Page%201/index.html) | [Ver Pasta](Login%20Page/Login%20Page%201/) | HTML5, CSS3, Flexbox |
-| **Login Page 2 - Astronaut Theme** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Login%20Page/Login%20Page%202/index.html) | [Ver Pasta](Login%20Page/Login%20Page%202/) | HTML5, CSS3, SVG |
-| **Login Page 3 - Forest Glassmorphism** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Login%20Page/Login%20Page%203/index.html) | [Ver Pasta](Login%20Page/Login%20Page%203/) | CSS Glassmorphism, Backdrop Blur |
-| **Login Page 4 - Animated Toggle** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Login%20Page/Login%20Page%204/index.html) | [Ver Pasta](Login%20Page/Login%20Page%204/) | HTML5, CSS3, JS Transitions |
+| **Auth 01 — Minimal Card** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/login-pages/modern-card/index.html) | [`login-pages/modern-card`](login-pages/modern-card/) | HTML5, CSS3, Flexbox |
+| **Auth 02 — Astronaut Theme** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/login-pages/astronaut-theme/index.html) | [`login-pages/astronaut-theme`](login-pages/astronaut-theme/) | HTML5, CSS3, SVG |
+| **Auth 03 — Forest Glass** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/login-pages/forest-glass/index.html) | [`login-pages/forest-glass`](login-pages/forest-glass/) | CSS Backdrop Filter, UI |
+| **Auth 04 — Dual Sliding Panel** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/login-pages/animated-toggle/index.html) | [`login-pages/animated-toggle`](login-pages/animated-toggle/) | HTML5, CSS3, JavaScript |
 
-### 🧩 Componentes UI
-| Projeto | Demonstração | Código Fonte | Tecnologias |
+### 4. Componentes UI (`components/`)
+| Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
-| **Dark-Light Loading** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Components/Dark-Light%20Loading/index.html) | [Ver Pasta](Components/Dark-Light%20Loading/) | CSS Keyframes, Dark/Light Switch |
-| **Modern Loading** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Components/Modern%20Loading/index.html) | [Ver Pasta](Components/Modern%20Loading/) | CSS Keyframes, Glowing Spinner |
-| **Stairs Stepper** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Components/Stairs/index.html) | [Ver Pasta](Components/Stairs/) | CSS 3D Keyframes |
+| **Theme Switcher & Loader** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/components/dark-light-loading/index.html) | [`components/dark-light-loading`](components/dark-light-loading/) | CSS Variables, Keyframes |
+| **Ring Spinner Loader** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/components/modern-loading/index.html) | [`components/modern-loading`](components/modern-loading/) | CSS3 Keyframes |
+| **3D Isometric Stairs** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/components/stairs/index.html) | [`components/stairs`](components/stairs/) | CSS 3D Transforms |
 
-### ⚡ JavaScript & Estudos
-| Projeto | Demonstração | Código Fonte | Tecnologias |
+### 5. JavaScript & Estudos (`javascript/`)
+| Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
-| **Bootstrap 5 Showcase & Carousel** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Curso%20de%20JS/Bootstrap/index.html) | [Ver Pasta](Curso%20de%20JS/Bootstrap/) | Bootstrap 5, jQuery |
-| **Validação de Formulários** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Curso%20de%20JS/Form%20validation/index.html) | [Ver Pasta](Curso%20de%20JS/Form%20validation/) | JavaScript Vanilla, DOM |
-| **JavaScript Funcional (Runner)** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Curso%20de%20JS/JavaScript%20Funcional/index.html) | [Ver Pasta](Curso%20de%20JS/JavaScript%20Funcional/) | ES6+, Array.map, Closures, Spread |
-| **Algoritmos & POO em JS** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/JS/index.html) | [Ver Pasta](JS/) | Classes POO, Higher-Order Functions |
-| **jQuery Sandbox** | [Abrir Projeto](https://rafaelmm16.github.io/Web-Development/Curso%20de%20JS/jQuery/index.html) | [Ver Pasta](Curso%20de%20JS/jQuery/) | jQuery, Manipulação do DOM |
+| **Bootstrap 5 Showcase** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/javascript/bootstrap/index.html) | [`javascript/bootstrap`](javascript/bootstrap/) | Bootstrap 5, HTML5 |
+| **Form Validator Engine** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/javascript/form-validation/index.html) | [`javascript/form-validation`](javascript/form-validation/) | JavaScript Vanilla, DOM |
+| **JS Funcional (Runner)** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/javascript/functional-js/index.html) | [`javascript/functional-js`](javascript/functional-js/) | ES6+, Array.map, Closures |
+| **POO & Closures** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/javascript/algorithms/index.html) | [`javascript/algorithms`](javascript/algorithms/) | Classes ES6, Higher-Order JS |
+| **jQuery DOM Lab** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/javascript/jquery/index.html) | [`javascript/jquery`](javascript/jquery/) | jQuery, DOM Events |
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
-
-- **Linguagens**: HTML5 Semântico, CSS3 Moderno (Flexbox, Grid, Keyframes, Glassmorphism), JavaScript (ES6+)
-- **Bibliotecas & Frameworks**: Tailwind CSS, Bootstrap 5, jQuery
-- **Deploy & CI/CD**: GitHub Pages, GitHub Actions (`.github/workflows/static.yml`)
-
----
-
-## 💻 Como Visualizar Localmente
-
-Para rodar o repositório localmente em sua máquina:
+## Como Executar Localmente
 
 1. Clone o repositório:
 ```bash
 git clone https://github.com/rafaelmm16/Web-Development.git
-```
-
-2. Acesse a pasta:
-```bash
 cd Web-Development
 ```
 
-3. Abra o arquivo `index.html` em qualquer navegador:
-- No Windows: dê duplo clique em `index.html` ou execute `start index.html`
-- Usando a extensão **Live Server** no VS Code / IDE.
-- Ou com um servidor HTTP simples:
+2. Abra o arquivo `index.html` diretamente no navegador ou sirva a pasta raiz com qualquer servidor estático:
 ```bash
 npx serve .
 ```
-
----
-
-<p align="center">
-  Desenvolvido por <a href="https://github.com/rafaelmm16">Rafael</a> 🚀
-</p>
