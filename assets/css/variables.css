@@ -1,0 +1,113 @@
+:root {
+  /* Dark Theme (Default) - Authentic Carbon & Warm Stone */
+  --bg-primary: #111110;
+  --bg-secondary: #181816;
+  --bg-elevated: #20201d;
+  --bg-subtle: #282824;
+  
+  --border-subtle: #272724;
+  --border-strong: #3a3a35;
+  --border-focus: #d97757;
+  
+  --text-primary: #eeeeec;
+  --text-secondary: #a1a09a;
+  --text-muted: #6e6d68;
+  
+  /* Warm Terracotta / Signal Orange & Moss Green Accents */
+  --accent: #e06d44;
+  --accent-hover: #f07d54;
+  --accent-subtle: rgba(224, 109, 68, 0.12);
+  --status-live: #4ade80;
+  
+  /* Category Accent Dots */
+  --cat-sites: #5b9bd5;
+  --cat-lp: #e06d44;
+  --cat-login: #a78bfa;
+  --cat-components: #eab308;
+  --cat-js: #4ade80;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Sizing & Borders */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --container-max: 1240px;
+  --header-height: 64px;
+  --transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f6f5f2;
+  --bg-secondary: #eeede9;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #e5e4df;
+
+  --border-subtle: #dcdbd5;
+  --border-strong: #c4c3bc;
+  --border-focus: #c85a32;
+
+  --text-primary: #161615;
+  --text-secondary: #575652;
+  --text-muted: #85847e;
+
+  --accent: #c85a32;
+  --accent-hover: #b04b25;
+  --accent-subtle: rgba(200, 90, 50, 0.1);
+  --status-live: #16a34a;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  selection-background-color: var(--accent);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Subtle Structural Grid Texture */
+.bg-grid-pattern {
+  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
