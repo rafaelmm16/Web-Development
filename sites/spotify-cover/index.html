@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spotify Web Player Clone com reprodutor de áudio interativo via Web Audio API, busca em tempo real, playlists e iluminação ambiente dinâmica.">
+  <title>Spotify Web Player — Clone Interativo</title>
+
+  <!-- Tailwind CSS CDN & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-screen w-screen bg-black text-zinc-100 flex flex-col select-none overflow-hidden p-2 gap-2 font-sans">
+
+  <!-- Área Superior (Sidebar + Conteúdo Principal) -->
+  <div class="flex flex-1 gap-2 min-h-0 overflow-hidden">
+
+    <!-- Sidebar Esquerda -->
+    <aside class="w-64 md:w-72 bg-[#121212] rounded-lg flex flex-col shrink-0 p-4 overflow-hidden border border-white/5 shadow-2xl">
+      <!-- Topo: Botões de Janela + Link Diretório -->
+      <div class="flex items-center justify-between mb-6 px-2">
+        <div class="flex items-center gap-2">
+          <a href="../../index.html" title="Voltar ao Diretório Principal" class="w-3 h-3 bg-[#ff5f57] rounded-full border border-black/20 hover:opacity-80 transition cursor-pointer block"></a>
+          <div class="w-3 h-3 bg-[#febc2e] rounded-full border border-black/20"></div>
+          <div class="w-3 h-3 bg-[#28c840] rounded-full border border-black/20"></div>
+        </div>
+        <a href="../../index.html" class="text-[11px] font-mono text-zinc-400 hover:text-white transition flex items-center gap-1">
+          <span>&larr; Portfólio</span>
+        </a>
+      </div>
+
+      <!-- Navegação Principal -->
+      <nav class="space-y-4 px-2" id="sidebar-nav">
+        <button
+          type="button"
+          data-tab="home"
+          class="nav-tab-btn flex items-center gap-4 text-sm font-semibold transition-all w-full text-left text-white"
+        >
+          <i data-lucide="home" class="w-[22px] h-[22px] text-[#1ed760] nav-icon"></i>
+          <span>Início</span>
+        </button>
+
+        <button
+          type="button"
+          data-tab="search"
+          class="nav-tab-btn flex items-center gap-4 text-sm font-semibold transition-all w-full text-left text-zinc-400 hover:text-white"
+        >
+          <i data-lucide="search" class="w-[22px] h-[22px] nav-icon"></i>
+          <span>Buscar</span>
+        </button>
+
+        <button
+          type="button"
+          data-tab="library"
+          class="nav-tab-btn flex items-center gap-4 text-sm font-semibold transition-all w-full text-left text-zinc-400 hover:text-white"
+        >
+          <i data-lucide="library" class="w-[22px] h-[22px] nav-icon"></i>
+          <span>Sua Biblioteca</span>
+        </button>
+      </nav>
+
+      <!-- Ações de Biblioteca -->
+      <div class="mt-8 space-y-4 px-2 pt-4 border-t border-zinc-800/80">
+        <button
+          type="button"
+          id="btn-create-playlist"
+          class="flex items-center gap-4 text-sm font-medium text-zinc-400 hover:text-white transition group w-full text-left"
+        >
+          <div class="w-7 h-7 bg-zinc-800 group-hover:bg-zinc-700 rounded-sm flex items-center justify-center text-zinc-300 group-hover:text-white transition">
+            <i data-lucide="plus-square" class="w-[18px] h-[18px]"></i>
+          </div>
+          <span>Criar playlist</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-liked-songs"
+          class="flex items-center gap-4 text-sm font-medium text-zinc-400 hover:text-white transition group w-full text-left"
+        >
+          <div class="w-7 h-7 bg-gradient-to-br from-indigo-600 to-emerald-500 rounded-sm flex items-center justify-center text-white shadow-sm">
+            <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
+          </div>
+          <div class="flex flex-col">
+            <span>Músicas Curtidas</span>
+            <span class="text-[11px] text-zinc-500" id="liked-count-label">3 músicas</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Cabeçalho de Playlists -->
+      <div class="flex items-center justify-between mt-6 pt-4 border-t border-zinc-800/60 px-2 text-xs font-semibold tracking-wider text-zinc-400 uppercase">
+        <span>Playlists</span>
+        <span class="text-[10px] text-zinc-600 font-normal" id="playlist-count">10</span>
+      </div>
+
+      <!-- Lista Rolável de Playlists -->
+      <div class="mt-3 flex-1 overflow-y-auto space-y-1.5 pr-2 text-sm text-zinc-400" id="playlists-container"></div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-1 bg-[#121212] rounded-lg flex flex-col min-w-0 overflow-hidden relative border border-white/5 shadow-2xl">
+      <!-- Gradiente Ambiente Dinâmico -->
+      <div
+        id="ambient-gradient"
+        class="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-yellow-700/40 to-transparent pointer-events-none transition-all duration-700 opacity-70"
+      ></div>
+
+      <!-- Barra Superior de Busca e Perfil -->
+      <header class="relative z-10 flex items-center justify-between p-4 md:px-8 bg-black/20 backdrop-blur-md border-b border-white/5">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            id="btn-nav-prev"
+            class="w-8 h-8 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/90 transition text-zinc-300 hover:text-white"
+            title="Faixa anterior"
+          >
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button
+            type="button"
+            id="btn-nav-next"
+            class="w-8 h-8 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/90 transition text-zinc-300 hover:text-white"
+            title="Próxima faixa"
+          >
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Campo de Busca -->
+          <div class="relative ml-2 w-48 sm:w-64 md:w-80">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400"></i>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="O que você quer ouvir?"
+              autocomplete="off"
+              class="w-full bg-zinc-900/90 text-sm text-white placeholder-zinc-400 rounded-full pl-9 pr-8 py-2 border border-white/10 focus:outline-none focus:border-[#1ed760] focus:ring-1 focus:ring-[#1ed760] transition"
+            >
+            <button
+              type="button"
+              id="btn-clear-search"
+              class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+              title="Limpar busca"
+            >
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Perfil & Badge -->
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:flex items-center gap-2 bg-white/10 hover:bg-white/20 transition rounded-full py-1 px-3 text-xs font-bold text-white border border-white/10 cursor-pointer">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#1ed760]"></i>
+            <span>Web Audio Synth</span>
+          </div>
+
+          <a
+            href="https://github.com/rafaelmm16"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 bg-black/60 hover:bg-black/90 transition rounded-full p-1 pr-3 border border-white/10 cursor-pointer"
+          >
+            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-[#1ed760] to-emerald-300 text-black font-bold text-xs flex items-center justify-center shadow">
+              R
+            </div>
+            <span class="text-xs font-semibold text-zinc-200">Rafael</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Corpo Rolável -->
+      <div class="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-8 relative z-10 pb-10">
+        <!-- Pílulas de Categoria -->
+        <div class="flex items-center gap-2" id="category-pills">
+          <button type="button" data-cat="all" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold transition bg-white text-black">
+            Tudo
+          </button>
+          <button type="button" data-cat="music" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold transition bg-white/10 text-white hover:bg-white/20">
+            Música
+          </button>
+          <button type="button" data-cat="liked" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold transition bg-white/10 text-white hover:bg-white/20">
+            Curtidas
+          </button>
+        </div>
+
+        <!-- Saudação Dinâmica -->
+        <div>
+          <h1 id="greeting-title" class="font-bold text-2xl md:text-3xl text-white tracking-tight">Boa tarde</h1>
+        </div>
+
+        <!-- Grid Rápido (6 Álbuns em Destaque) -->
+        <div>
+          <div id="quick-mix-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+          <div id="quick-mix-empty" class="hidden py-8 text-center text-zinc-400 text-sm"></div>
+        </div>
+
+        <!-- Seção 2: Feito para Rafael (Daily Mixes) -->
+        <div class="space-y-4">
+          <div class="flex justify-between items-end">
+            <div>
+              <h2 class="font-bold text-xl md:text-2xl text-white tracking-tight">Feito para Rafael</h2>
+              <p class="text-xs text-zinc-400 mt-1">Sua trilha sonora diária personalizada</p>
+            </div>
+            <button
+              type="button"
+              id="btn-show-all"
+              class="text-xs font-bold text-zinc-400 hover:text-white transition tracking-wider hover:underline"
+            >
+              Mostrar tudo
+            </button>
+          </div>
+
+          <div id="daily-mix-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+          <div id="daily-mix-empty" class="hidden py-8 text-center text-zinc-400 text-sm"></div>
+        </div>
+
+        <!-- Seção 3: Tocadas Recentemente -->
+        <div class="space-y-4 pt-2">
+          <div class="flex justify-between items-end">
+            <h2 class="font-bold text-xl md:text-2xl text-white tracking-tight">Tocadas recentemente</h2>
+          </div>
+
+          <div class="bg-white/5 rounded-lg border border-white/5 overflow-hidden">
+            <div class="grid grid-cols-[auto_1fr_1fr_auto] gap-4 px-4 py-2.5 text-xs font-semibold text-zinc-400 border-b border-white/5 uppercase tracking-wider">
+              <span class="w-6 text-center">#</span>
+              <span>Título</span>
+              <span class="hidden md:inline">Álbum</span>
+              <span class="text-right">Duração</span>
+            </div>
+            <div id="recent-tracks-list" class="divide-y divide-white/5"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Barra Inferior Persistente do Player -->
+  <footer class="h-20 bg-[#181818] rounded-lg px-4 flex items-center justify-between border border-white/5 shrink-0 shadow-2xl relative z-20">
+    <!-- Esquerda: Faixa Atual -->
+    <div class="flex items-center gap-3.5 w-1/4 min-w-[180px]">
+      <div class="relative w-14 h-14 rounded-md overflow-hidden bg-zinc-800 shrink-0 shadow-md">
+        <img id="player-cover" src="U2.jpg" alt="Capa do álbum" class="w-full h-full object-cover">
+      </div>
+
+      <div class="flex flex-col min-w-0 justify-center">
+        <span id="player-title" class="font-semibold text-sm text-white truncate hover:underline cursor-pointer">Walk On</span>
+        <span id="player-artist" class="text-xs text-zinc-400 truncate hover:underline cursor-pointer hover:text-zinc-200">U2</span>
+      </div>
+
+      <button
+        type="button"
+        id="btn-player-like"
+        class="transition ml-2 p-1 text-[#1ed760]"
+        title="Salvar nas Músicas Curtidas"
+      >
+        <svg id="player-heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Centro: Controles & Barra de Progresso -->
+    <div class="flex flex-col items-center gap-2 max-w-[45%] w-full">
+      <div class="flex items-center gap-5">
+        <button
+          type="button"
+          id="btn-shuffle"
+          class="transition relative text-zinc-400 hover:text-white"
+          title="Ordem aleatória"
+        >
+          <i data-lucide="shuffle" class="w-[18px] h-[18px]"></i>
+          <span id="shuffle-dot" class="hidden absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#1ed760] rounded-full"></span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-prev"
+          class="text-zinc-400 hover:text-white transition"
+          title="Anterior"
+        >
+          <i data-lucide="skip-back" class="w-5 h-5"></i>
+        </button>
+
+        <button
+          type="button"
+          id="btn-play-pause"
+          class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 active:scale-95 transition shadow-md"
+          title="Tocar / Pausar"
+        >
+          <svg id="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="ml-0.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <svg id="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="hidden">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          id="btn-next"
+          class="text-zinc-400 hover:text-white transition"
+          title="Próxima"
+        >
+          <i data-lucide="skip-forward" class="w-5 h-5"></i>
+        </button>
+
+        <button
+          type="button"
+          id="btn-repeat"
+          class="transition relative text-zinc-400 hover:text-white"
+          title="Repetir"
+        >
+          <i data-lucide="repeat" class="w-[18px] h-[18px]"></i>
+          <span id="repeat-dot" class="hidden absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#1ed760] rounded-full"></span>
+        </button>
+      </div>
+
+      <!-- Seek Bar -->
+      <div class="flex items-center gap-2 w-full max-w-md">
+        <span id="time-current" class="text-[11px] text-zinc-400 tabular-nums w-8 text-right">0:31</span>
+
+        <div
+          id="seek-bar"
+          class="group h-1 hover:h-1.5 rounded-full flex-1 bg-zinc-600/60 relative cursor-pointer transition-all"
+        >
+          <div
+            id="seek-fill"
+            class="h-full bg-white group-hover:bg-[#1ed760] rounded-full relative transition-colors"
+            style="width: 12.8%;"
+          >
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow"></div>
+          </div>
+        </div>
+
+        <span id="time-duration" class="text-[11px] text-zinc-400 tabular-nums w-8">4:02</span>
+      </div>
+    </div>
+
+    <!-- Direita: Volume e Dispositivos -->
+    <div class="flex items-center gap-3 w-1/4 justify-end text-zinc-400">
+      <button type="button" class="hover:text-white transition p-1 hidden md:inline" title="Letra">
+        <i data-lucide="mic-2" class="w-[17px] h-[17px]"></i>
+      </button>
+      <button type="button" class="hover:text-white transition p-1 hidden md:inline" title="Fila">
+        <i data-lucide="list-music" class="w-[17px] h-[17px]"></i>
+      </button>
+      <button type="button" class="hover:text-white transition p-1 hidden lg:inline" title="Dispositivos">
+        <i data-lucide="laptop-2" class="w-[17px] h-[17px]"></i>
+      </button>
+
+      <!-- Controle de Volume -->
+      <div class="flex items-center gap-2">
+        <button type="button" id="btn-mute" class="hover:text-white transition p-1" title="Mudo">
+          <i id="volume-icon" data-lucide="volume-2" class="w-[18px] h-[18px]"></i>
+        </button>
+
+        <div
+          id="volume-bar"
+          class="group h-1 hover:h-1.5 w-20 md:w-24 bg-zinc-600/60 rounded-full relative cursor-pointer transition-all"
+        >
+          <div
+            id="volume-fill"
+            class="h-full bg-white group-hover:bg-[#1ed760] rounded-full relative transition-colors"
+            style="width: 75%;"
+          >
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -17,6 +17,19 @@
   const PROJECTS_DATA = [
     /* ================= Sites & Clones (sites/) ================= */
     {
+      id: "spotify-cover",
+      title: "Spotify Web Player Clone",
+      category: "sites",
+      categoryName: "Sites & Clones",
+      dotClass: "dot-sites",
+      pathLabel: "sites/spotify-cover",
+      image: "sites/spotify-cover/U2.jpg",
+      desc: "Recriação interativa do Spotify Web Player com síntese de áudio via Web Audio API, iluminação ambiente dinâmica, busca em tempo real e playlists.",
+      tags: ["Next.js", "Tailwind CSS", "Web Audio API", "React"],
+      liveUrl: "sites/spotify-cover/index.html",
+      githubUrl: `${GITHUB_REPO_BASE}/sites/spotify-cover`
+    },
+    {
       id: "netflix-clone",
       title: "Netflix UI Clone",
       category: "sites",

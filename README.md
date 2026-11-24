@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/GitHub%20Pages-Online-16a34a?style=flat-square&logo=github" alt="GitHub Pages Live">
-  <img src="https://img.shields.io/badge/Projetos-21%20Entradas-e06d44?style=flat-square" alt="21 Projetos">
+  <img src="https://img.shields.io/badge/Projetos-22%20Entradas-e06d44?style=flat-square" alt="22 Projetos">
   <img src="https://img.shields.io/badge/Arquitetura-kebab--case%20%7C%20Modular-272724?style=flat-square" alt="Arquitetura Modular">
 </p>
 
@@ -31,7 +31,7 @@ Web-Development/
 │   │   ├── layout.css                   # Grid, cabeçalho editorial e estrutura
 │   │   └── components.css               # Cards, barra de ferramentas e lista
 │   └── js/
-│       ├── projects-data.js             # Catálogo e metadados dos 21 projetos
+│       ├── projects-data.js             # Catálogo e metadados dos 22 projetos
 │       └── app.js                       # Busca, filtros, atalhos e estado de UI
 │
 ├── sites/                               # Clones de Interfaces e Aplicações Web
@@ -40,6 +40,7 @@ Web-Development/
 │   ├── flowers/                         # Animação noturna de flores em CSS puro
 │   ├── netflix/                         # Clone da interface principal da Netflix
 │   ├── pinterest/                       # Feed em layout Masonry estilo Pinterest
+│   ├── spotify-cover/                   # Clone interativo do Spotify Web Player (Next.js + Web Audio API)
 │   ├── word-game/                       # Léxico: Jogo de adivinhação de palavras
 │   └── youtube/                         # Clone da página inicial do YouTube
 │
@@ -73,6 +74,7 @@ Web-Development/
 ### 1. Sites & Aplicações (`sites/`)
 | Projeto | Demo Live | Diretório | Stack |
 | :--- | :--- | :--- | :--- |
+| **Spotify Web Player Clone** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/spotify-cover/index.html) | [`sites/spotify-cover`](sites/spotify-cover/) | Next.js, Tailwind CSS, Web Audio API |
 | **Netflix UI Clone** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/netflix/index.html) | [`sites/netflix`](sites/netflix/) | HTML5, CSS3, JavaScript |
 | **YouTube Interface** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/youtube/index.html) | [`sites/youtube`](sites/youtube/) | HTML5, CSS Grid, Flexbox |
 | **Pinterest Masonry Feed** | [Abrir Demo](https://rafaelmm16.github.io/Web-Development/sites/pinterest/index.html) | [`sites/pinterest`](sites/pinterest/) | HTML5, CSS Columns |
